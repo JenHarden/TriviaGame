@@ -11,54 +11,70 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="assets/javascript/app.js"></script>
 
 </head>
 
-
 <body>
+
+    <!-- This displays the title of the game -->
 
     <div class="container-fluid" id="gameWindow">
         <div class="container-fluid">
             <div class="logo" id="logo"><img src="assets/images/title1.png" alt="Harry Potter Trivia"></div>
         </div>
 
-        <div class="container" id="startDiv">
-            <button type="button" class="btn btn-primary btn-lg" id="startButton">Start</button>
-        </div>
+        <!-- To keep the game responsive, created a bootstrap grid, this is the game stats shown during game play -->
 
-        <div class="card w-50" id="cardDiv">
-            <div class="card-body text-center">
-                <h5 class="card-title" id="questionAsked"></h5>
-                <div id="answerOptions"></div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="card fontstyle" id="gameStatDiv">
+                    <div class="card-body">
+                        <div class="text-center">Time Remaining:
+                            <div id="answerTimer"></div>
+                        </div>
+                        <br>
+                        <div>Wins: <span id="wins"></span></div>
+                        <div>Losses: <span id="losses"></span></div>
+                        <div>Unanswered: <span id="outOfTime"></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- This bootstrap grid contains three different divs that will be visible at different times: -->
+            <!-- The first div will be for the starting of the game.   -->
+
+            <div class="col-md-8 text-center">
+                <div class="container text-center" id="startDiv">
+                    <button type="button" class="btn btn-secondary btn-lg" id="startButton">Start</button>
+                </div>
+
+                <!-- The second div is for the question/answer section and jquery will populate the question buttons. -->
+
+                <div class="card w-50" id="gameDiv">
+                    <div class="card-body text-center">
+                        <h5 class="card-title" id="questionAsked"></h5>
+                        <div id="answerOptions"></div>
+                    </div>
+                </div>
+
+                <!-- The third div displays the final stats of the game and will give the user the option to restart the game rather than refreshing the page. -->
+
+                <div class="container-fluid fontstyle" id="endingStatDiv">
+                    <div>Time Remaining: <span id="answerTimer"></span></div>
+                    <br>
+                    <div>Wins: <span id="wins"></span></div>
+                    <div>Losses: <span id="losses"></span></div>
+                    <div>Unanswered: <span id="outOfTime"></span></div>
+                    <br>
+                    <button type="button" class="btn btn-primary btn-lg" id="startOverButton">Start Over?</button>
+                </div>
+
             </div>
 
         </div>
-
-        <!-- <div class="container-fluid" id="questionDiv">
-            <div>Time Remaining: <span id="questionTimer"></span></div>
-            <div id="questionAsked"></div>
-            <div id="answerOptions"></div>
-        </div>
-
-        <div class="container-fluid" id="CorrectAnswerDiv">
-            <div>Time Remaining: <span id="answerTimer"></span></div>
-            <div id="displayMessage"></div>
-            <div id="correctAnswerImage"></div>
-        </div>
-
-        <div class="container-fluid" id="otherAnsweredDiv">
-            <div>Time Remaining: <span id="answerTimer"></span></div>
-            <div id="displayMessage"></div>
-            <div id=correctAnswerImage></div>
-        </div> -->
-
-        <div class="container-fluid" id="statDiv">
-            <div>Time Remaining: <span id="statTimer"></span></div>
-            <button type="button" class="btn btn-primary btn-lg" id="startOverButton">Start Over?</button>
-        </div>
-
     </div>
 
 </body>

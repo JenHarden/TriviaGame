@@ -4,7 +4,9 @@ $(document).ready(function () {
     var correctlyAnswered = 0;
     var incorrectlyAnswered = 0;
     var Unanswered = 0;
-    var timeLeftPlay = 30;
+    var initialTimePlay = 30;
+    var timeLeftPlay = initialTimePlay;
+    var pauseTimer = false;
     var currentCorrectAnswer = "";
     var currentQuestionIndex = 0;
     var trivia = [{
@@ -81,28 +83,32 @@ $(document).ready(function () {
     ];
     console.log(trivia);
 
-    function countdown() {
-        timeLeftPlay--;
-        if (timeLeftPlay == 0) {
-            $("#cardDiv").hide();
-            $("#answerDiv").show();
+    function countdown() {   
+        if (!pauseTimer) {
+            timeLeftPlay--;
         }
-        $("#questionTimer").text(timeLeftPlay + ' seconds');
+        if (timeLeftPlay == 0) {
+            $("#gameDiv").show();
+            $("#gameStatDiv").show();
+        }
+        $("#answerTimer").text(timeLeftPlay + ' seconds');
     }
 
-    $("#cardDiv").hide();
-    $("#statDiv").hide();
+    $("#gameDiv").hide();
+    $("#endingStatDiv").hide();
     $("#answerDiv").hide();
 
     function resetGame() {
         currentQuestionIndex = 0;
         $('#startDiv').hide();
-        $("#cardDiv").show();
-        $("#statDiv").hide();
+        $("#gameStatDiv").show();
+        $("#gameDiv").show();
+        $("#endingStatDiv").hide();
         displayQuestionAnswers(trivia[currentQuestionIndex]);
         correctlyAnswered = 0;
         incorrectlyAnswered = 0;
         Unanswered = 0;
+        pauseTimer = false;
         timeLeftPlay = 30;
         setInterval(function () {
             countdown();
@@ -118,7 +124,7 @@ $(document).ready(function () {
             // console.log("answer", answer);
 
             var btn = $('<button/>', {
-                text: answer, click: function () { checkAnswer(answer); }
+                text: answer, click: function () { answerClicked(answer); }
 
             });
             btn.addClass("btn btn-secondary");
@@ -127,11 +133,12 @@ $(document).ready(function () {
             $("#answerOptions").append(btn);
             $("#answerOptions").append('</div>');
         });
-        // $("#answerOptions").append('</ul>');
+
     };
 
-    function checkAnswer(answerGuessed) {
+    function answerClicked(answerGuessed) {
         console.log(answerGuessed);
+        timeLeftPlay = initialTimePlay;
         if (answerGuessed === currentCorrectAnswer.answer) {
             correctlyAnswered++;
         } else {
@@ -139,14 +146,14 @@ $(document).ready(function () {
         }
         currentQuestionIndex++;
         if (currentQuestionIndex === trivia.length) {
+            pauseTimer = true;
+            $("#gameDiv").hide();
+            $("#gameStatDiv").hide();
+            $("#endingStatDiv").show();
             // End game here
         }
         displayQuestionAnswers(trivia[currentQuestionIndex]);
     };
-
-    // function displayAnswerScreen () {
-    //     if ()
-    // }
 
 
     $('#startButton').on('click', resetGame);

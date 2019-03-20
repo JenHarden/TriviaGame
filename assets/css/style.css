@@ -21,11 +21,24 @@ body {
     margin-bottom: 15px;
 }
 
-#cardDiv {
+#gameDiv {
     margin: auto;
     float: none;
     margin-bottom: 10px;
 }
+
+#startDiv {
+    margin-top: 140px;
+}
+
+.fontstyle {
+    font-family: 'Acme', sans-serif;
+}
+
+#endingStatDiv {
+    font-size: 2em;
+}
+
 
 /* #gameWindow {
     background: white;
