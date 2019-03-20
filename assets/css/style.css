@@ -1,0 +1,33 @@
+/* General Styling */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: url("../images/oldwallpaper.jpg");
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#logo {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#answerOptions > div {
+    margin-bottom: 15px;
+}
+
+#cardDiv {
+    margin: auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
+/* #gameWindow {
+    background: white;
+    border-radius: 20px;
+} */

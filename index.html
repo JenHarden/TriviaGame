@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Harry Potter Trivia</title>
+
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+
+</head>
+
+
+<body>
+
+    <div class="container-fluid" id="gameWindow">
+        <div class="container-fluid">
+            <div class="logo" id="logo"><img src="assets/images/title1.png" alt="Harry Potter Trivia"></div>
+        </div>
+
+        <div class="container" id="startDiv">
+            <button type="button" class="btn btn-primary btn-lg" id="startButton">Start</button>
+        </div>
+
+        <div class="card w-50" id="cardDiv">
+            <div class="card-body text-center">
+                <h5 class="card-title" id="questionAsked"></h5>
+                <div id="answerOptions"></div>
+            </div>
+
+        </div>
+
+        <!-- <div class="container-fluid" id="questionDiv">
+            <div>Time Remaining: <span id="questionTimer"></span></div>
+            <div id="questionAsked"></div>
+            <div id="answerOptions"></div>
+        </div>
+
+        <div class="container-fluid" id="CorrectAnswerDiv">
+            <div>Time Remaining: <span id="answerTimer"></span></div>
+            <div id="displayMessage"></div>
+            <div id="correctAnswerImage"></div>
+        </div>
+
+        <div class="container-fluid" id="otherAnsweredDiv">
+            <div>Time Remaining: <span id="answerTimer"></span></div>
+            <div id="displayMessage"></div>
+            <div id=correctAnswerImage></div>
+        </div> -->
+
+        <div class="container-fluid" id="statDiv">
+            <div>Time Remaining: <span id="statTimer"></span></div>
+            <button type="button" class="btn btn-primary btn-lg" id="startOverButton">Start Over?</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
