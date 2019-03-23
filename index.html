@@ -23,7 +23,9 @@
 
     <div class="container-fluid" id="gameWindow">
         <div class="container-fluid">
-            <div class="logo" id="logo"><img src="assets/images/title1.png" alt="Harry Potter Trivia"></div>
+            <div class="container text-center" id="title">
+                <div class="logo" id="logo"><img id="logoImage" src="assets/images/title.png" alt="Harry Potter Trivia"></div>
+            </div>
         </div>
 
         <!-- To keep the game responsive, created a bootstrap grid, this is the game stats shown during game play -->
@@ -36,11 +38,17 @@
                             <div id="answerTimer"></div>
                         </div>
                         <br>
-                        <div>Wins: <span id="wins"></span></div>
-                        <div>Losses: <span id="losses"></span></div>
-                        <div>Unanswered: <span id="outOfTime"></span></div>
+                        <div>Wins: <span class="wins"></span></div>
+                        <div>Losses: <span class="losses"></span></div>
+                        <div>Unanswered: <span class="outOfTime"></span></div>
                     </div>
                 </div>
+                <br>
+                <!-- <div class="col-md-2" id="audioControl">
+                    <audio id="myAudio" controls autoplay="true" src="assets/sound/hedwigTheme.mp3" autostart="true"
+                        loop="true"></audio> -->
+                    <!-- The autoplay function does not work in Chrome, but it does work in Internet Explorer.  In Chrome you will need to manually choose to play the music -->
+                <!-- </div> -->
             </div>
 
             <!-- This bootstrap grid contains three different divs that will be visible at different times: -->
@@ -48,7 +56,7 @@
 
             <div class="col-md-8 text-center">
                 <div class="container text-center" id="startDiv">
-                    <button type="button" class="btn btn-secondary btn-lg" id="startButton">Start</button>
+                    <button type="button" class="btn btn-primary btn-lg" id="startButton">Start</button>
                 </div>
 
                 <!-- The second div is for the question/answer section and jquery will populate the question buttons. -->
@@ -60,14 +68,15 @@
                     </div>
                 </div>
 
+
                 <!-- The third div displays the final stats of the game and will give the user the option to restart the game rather than refreshing the page. -->
 
                 <div class="container-fluid fontstyle" id="endingStatDiv">
                     <div>Time Remaining: <span id="answerTimer"></span></div>
                     <br>
-                    <div>Wins: <span id="wins"></span></div>
-                    <div>Losses: <span id="losses"></span></div>
-                    <div>Unanswered: <span id="outOfTime"></span></div>
+                    <div>Wins: <span class="wins"></span></div>
+                    <div>Losses: <span class="losses"></span></div>
+                    <div>Unanswered: <span class="outOfTime"></span></div>
                     <br>
                     <button type="button" class="btn btn-primary btn-lg" id="startOverButton">Start Over?</button>
                 </div>

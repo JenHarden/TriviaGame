@@ -5,7 +5,7 @@
 }
 
 body {
-    background: url("../images/oldwallpaper.jpg");
+    background: url("../images/houses.jpg");
     height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -15,6 +15,16 @@ body {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 30px;
+    background: white;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.7;
+}
+
+#logoImage {
+    width: 100%;
+    height: auto;
 }
 
 #answerOptions > div {
@@ -28,7 +38,7 @@ body {
 }
 
 #startDiv {
-    margin-top: 140px;
+    margin-top: 30px;
 }
 
 .fontstyle {
@@ -37,10 +47,11 @@ body {
 
 #endingStatDiv {
     font-size: 2em;
+    background: white;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
-/* #gameWindow {
-    background: white;
-    border-radius: 20px;
-} */
+#startOverButton {
+    margin-bottom: 20px;
+}

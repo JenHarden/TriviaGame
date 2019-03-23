@@ -1,9 +1,19 @@
-
+// Ensures that the page's DOM is ready before executing any JavaScript
 $(document).ready(function () {
+
+    // Hiding elements until game started
+
+    $("#gameDiv").hide();
+    $("#endingStatDiv").hide();
+    $("#gameStatDiv").hide();
+
+    // Game start click event
+
+    $('#startButton').on('click', resetGame);
 
     var correctlyAnswered = 0;
     var incorrectlyAnswered = 0;
-    var Unanswered = 0;
+    var unanswered = 0;
     var initialTimePlay = 30;
     var timeLeftPlay = initialTimePlay;
     var pauseTimer = false;
@@ -80,23 +90,31 @@ $(document).ready(function () {
             image: "./assets/images/wand.gif"
         }
     },
-    ];
-    console.log(trivia);
 
-    function countdown() {   
+    {
+        question: "Harry Potter shares the same birthday as the author, J.K. Rowling.",
+        answers: ["True", "False"],
+        correct: {
+            answer: "True",
+            image: "./assets/images/birthday.gif"
+        }
+    },
+    ];
+
+    // Setting game timer
+
+    function countdown() {
         if (!pauseTimer) {
             timeLeftPlay--;
+            answerCheck();
         }
-        if (timeLeftPlay == 0) {
-            $("#gameDiv").show();
-            $("#gameStatDiv").show();
-        }
+
+        // Makes the game timer viewable in the DOM
+
         $("#answerTimer").text(timeLeftPlay + ' seconds');
     }
 
-    $("#gameDiv").hide();
-    $("#endingStatDiv").hide();
-    $("#answerDiv").hide();
+    // Reset game function to reset variables, timer and stat display
 
     function resetGame() {
         currentQuestionIndex = 0;
@@ -107,58 +125,99 @@ $(document).ready(function () {
         displayQuestionAnswers(trivia[currentQuestionIndex]);
         correctlyAnswered = 0;
         incorrectlyAnswered = 0;
-        Unanswered = 0;
+        unanswered = 0;
         pauseTimer = false;
-        timeLeftPlay = 30;
+        timeLeftPlay = initialTimePlay;
+        $(".wins").text(correctlyAnswered);
+        $(".losses").text(incorrectlyAnswered);
+        $(".outOfTime").text(unanswered);
         setInterval(function () {
             countdown();
         }, 1000);
     };
 
+    // Displaying the question and answers into the game and dynamically creates buttons to display in the DOM
+
     function displayQuestionAnswers(triviaItem) {
         $("#answerOptions").html('');
-        // $("#answerOptions").append('<ul>');
-        currentCorrectAnswer = triviaItem.correct;
-        $("#questionAsked").text(triviaItem.question);
-        $.each(triviaItem.answers, function (i, answer) {
-            // console.log("answer", answer);
+        if (triviaItem) {
+            currentCorrectAnswer = triviaItem.correct;
+            $("#questionAsked").text(triviaItem.question);
+            $.each(triviaItem.answers, function (i, answer) {
 
-            var btn = $('<button/>', {
-                text: answer, click: function () { answerClicked(answer); }
+                var btn = $('<button/>', {
+                    text: answer, click: function () { answerClicked(answer); }
 
+                });
+                btn.addClass("btn btn-secondary");
+
+                $("#answerOptions").append('<div>');
+                $("#answerOptions").append(btn);
+                $("#answerOptions").append('</div>');
             });
-            btn.addClass("btn btn-secondary");
-
-            $("#answerOptions").append('<div>');
-            $("#answerOptions").append(btn);
-            $("#answerOptions").append('</div>');
-        });
-
+        }
     };
 
+    // This is the click event for the buttons and compare the guess to the correct answer.  Updates game win/loss state
+
     function answerClicked(answerGuessed) {
-        console.log(answerGuessed);
         timeLeftPlay = initialTimePlay;
         if (answerGuessed === currentCorrectAnswer.answer) {
             correctlyAnswered++;
+            $(".wins").text("" + correctlyAnswered);
         } else {
             incorrectlyAnswered++;
+            $(".losses").text(incorrectlyAnswered);
         }
+
+        // End game state
+
         currentQuestionIndex++;
         if (currentQuestionIndex === trivia.length) {
             pauseTimer = true;
             $("#gameDiv").hide();
             $("#gameStatDiv").hide();
             $("#endingStatDiv").show();
-            // End game here
         }
         displayQuestionAnswers(trivia[currentQuestionIndex]);
     };
 
+    // Checking to see if an answer was clicked before time ran out.
 
-    $('#startButton').on('click', resetGame);
+    function answerCheck() {
+        if (timeLeftPlay === 0) {
+            pauseTimer = true;
+            unanswered++;
+            setTimeout(unansweredPause, 2000);
+            $(".outOfTime").text(unanswered);
+            $("#gameDiv").show();
+            $("#gameStatDiv").show();
+        }
+    }
+
+    // This is the call back function for a 2 second pause
+
+    function unansweredPause() {
+        pauseTimer = false;
+        timeLeftPlay = initialTimePlay;
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < trivia.length) {
+            displayQuestionAnswers(trivia[currentQuestionIndex]);
+        }
+        else {
+            if (currentQuestionIndex === trivia.length) {
+                pauseTimer = true;
+                $("#gameDiv").hide();
+                $("#gameStatDiv").hide();
+                $("#endingStatDiv").show();
+                // End game here
+            }
+        }
+    }
+
+    // This is the restart game event click
 
     $('#startOverButton').on('click', resetGame);
-
 
 });
