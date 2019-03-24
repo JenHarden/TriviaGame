@@ -15,16 +15,21 @@ body {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 30px;
-    background: white;
+    background: rgba(255, 255, 255, .5);
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    opacity: 0.7;
+    /* opacity: 0.7; */
 }
 
 #logoImage {
     width: 100%;
     height: auto;
+}
+
+#startImage{
+    width: auto;
+    height: 100%;
 }
 
 #answerOptions > div {
@@ -35,6 +40,10 @@ body {
     margin: auto;
     float: none;
     margin-bottom: 10px;
+}
+
+.messageDiv {
+    background: rgba(255, 255, 255, .7);
 }
 
 #startDiv {
@@ -54,4 +63,8 @@ body {
 
 #startOverButton {
     margin-bottom: 20px;
+}
+
+#startButton {
+    margin-top: 20px;
 }

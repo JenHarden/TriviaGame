@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <!-- To keep the game responsive, created a bootstrap grid, this is the game stats shown during game play -->
+        <!-- To keep the game responsive, a bootstrap grid was used, this is the game stats shown during game play -->
 
         <div class="row">
             <div class="col-md-2">
@@ -44,22 +44,24 @@
                     </div>
                 </div>
                 <br>
-                <!-- <div class="col-md-2" id="audioControl">
+                <div class="col-md-2" id="audioControl">
                     <audio id="myAudio" controls autoplay="true" src="assets/sound/hedwigTheme.mp3" autostart="true"
-                        loop="true"></audio> -->
-                    <!-- The autoplay function does not work in Chrome, but it does work in Internet Explorer.  In Chrome you will need to manually choose to play the music -->
-                <!-- </div> -->
+                        loop="true"></audio>
+                    <!-- The autoplay function does not work in Chrome, but it does work in Internet Explorer. -->
+                </div>
             </div>
 
-            <!-- This bootstrap grid contains three different divs that will be visible at different times: -->
-            <!-- The first div will be for the starting of the game.   -->
+            <!-- This bootstrap grid contains four different divs that will be visible at different times: -->
+            <!-- The first div is used to start the game play.   -->
 
             <div class="col-md-8 text-center">
                 <div class="container text-center" id="startDiv">
+                    <img id="startImage" src="assets/images/openimage.jpg">
+                    <br>
                     <button type="button" class="btn btn-primary btn-lg" id="startButton">Start</button>
                 </div>
 
-                <!-- The second div is for the question/answer section and jquery will populate the question buttons. -->
+                <!-- The second div displays the question/answer section and jquery will populate the question buttons dynamically. -->
 
                 <div class="card w-50" id="gameDiv">
                     <div class="card-body text-center">
@@ -69,17 +71,22 @@
                 </div>
 
 
-                <!-- The third div displays the final stats of the game and will give the user the option to restart the game rather than refreshing the page. -->
+                <!-- The third div displays the final game stats and will restart with a button click, rather than refreshing the page. -->
 
                 <div class="container-fluid fontstyle" id="endingStatDiv">
                     <div>Time Remaining: <span id="answerTimer"></span></div>
                     <br>
+                    <h2>All done!</h2>
                     <div>Wins: <span class="wins"></span></div>
                     <div>Losses: <span class="losses"></span></div>
                     <div>Unanswered: <span class="outOfTime"></span></div>
                     <br>
                     <button type="button" class="btn btn-primary btn-lg" id="startOverButton">Start Over?</button>
                 </div>
+
+                <!-- The fourth div displays the state of win/loss for round -->
+
+                <div class="messageDiv"></div>
 
             </div>
 

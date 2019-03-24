@@ -158,15 +158,29 @@ $(document).ready(function () {
         }
     };
 
+    // This is the function to display message to player of win/loss for round
+
+    function msgCreator (message, correctAnswerText, correctAnswerImage) {
+        var messageToDisplay = "<h1>" + message + "</h1>";
+            messageToDisplay = messageToDisplay + "<h4>" + correctAnswerText + "</h4>" + '<img src="' + correctAnswerImage + '">';
+        $(".messageDiv").html(messageToDisplay);
+        $(".messageDiv").show();
+        setTimeout (function () {
+            $(".messageDiv").hide();
+        }, 3000);
+    }
+
     // This is the click event for the buttons and compare the guess to the correct answer.  Updates game win/loss state
 
     function answerClicked(answerGuessed) {
         timeLeftPlay = initialTimePlay;
         if (answerGuessed === currentCorrectAnswer.answer) {
             correctlyAnswered++;
+            msgCreator("You win!", "", currentCorrectAnswer.image);
             $(".wins").text("" + correctlyAnswered);
         } else {
             incorrectlyAnswered++;
+            msgCreator("You lose...", currentCorrectAnswer.answer, currentCorrectAnswer.image);
             $(".losses").text(incorrectlyAnswered);
         }
 
@@ -188,6 +202,7 @@ $(document).ready(function () {
         if (timeLeftPlay === 0) {
             pauseTimer = true;
             unanswered++;
+            msgCreator("Time ran out!", currentCorrectAnswer.answer, currentCorrectAnswer.image);
             setTimeout(unansweredPause, 2000);
             $(".outOfTime").text(unanswered);
             $("#gameDiv").show();
@@ -211,7 +226,6 @@ $(document).ready(function () {
                 $("#gameDiv").hide();
                 $("#gameStatDiv").hide();
                 $("#endingStatDiv").show();
-                // End game here
             }
         }
     }
