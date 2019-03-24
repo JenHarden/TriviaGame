@@ -19,7 +19,6 @@ body {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    /* opacity: 0.7; */
 }
 
 #logoImage {
@@ -44,6 +43,9 @@ body {
 
 .messageDiv {
     background: rgba(255, 255, 255, .7);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #startDiv {

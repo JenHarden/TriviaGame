@@ -33,7 +33,7 @@ $(document).ready(function () {
         answers: ["Jeremy Irons", "Tom Hiddleston", "Gary Oldman", "Ralph Fiennes"],
         correct: {
             answer: "Ralph Fiennes",
-            image: "./assets/images/lordvodemort.gif"
+            image: "./assets/images/lordvoldemort.gif"
         }
     },
 
@@ -69,7 +69,7 @@ $(document).ready(function () {
         answers: ["No. 12 Prinet Drive", "No. 4 Privet Drive", "No. 6 Priket Drive", "No. 9 Privey Drive"],
         correct: {
             answer: "No. 4 Privet Drive",
-            image: "./assets/images/privitdrive.gif"
+            image: "./assets/images/privetdrive.gif"
         }
     },
 
@@ -139,6 +139,7 @@ $(document).ready(function () {
     // Displaying the question and answers into the game and dynamically creates buttons to display in the DOM
 
     function displayQuestionAnswers(triviaItem) {
+        pauseTimer = false;
         $("#answerOptions").html('');
         if (triviaItem) {
             currentCorrectAnswer = triviaItem.correct;
@@ -160,12 +161,12 @@ $(document).ready(function () {
 
     // This is the function to display message to player of win/loss for round
 
-    function msgCreator (message, correctAnswerText, correctAnswerImage) {
+    function msgCreator(message, correctAnswerText, correctAnswerImage) {
         var messageToDisplay = "<h1>" + message + "</h1>";
-            messageToDisplay = messageToDisplay + "<h4>" + correctAnswerText + "</h4>" + '<img src="' + correctAnswerImage + '">';
+        messageToDisplay = messageToDisplay + "<h4>" + correctAnswerText + "</h4>" + '<img src="' + correctAnswerImage + '">';
         $(".messageDiv").html(messageToDisplay);
         $(".messageDiv").show();
-        setTimeout (function () {
+        setTimeout(function () {
             $(".messageDiv").hide();
         }, 3000);
     }
@@ -174,26 +175,32 @@ $(document).ready(function () {
 
     function answerClicked(answerGuessed) {
         timeLeftPlay = initialTimePlay;
+        pauseTimer = true;
         if (answerGuessed === currentCorrectAnswer.answer) {
             correctlyAnswered++;
             msgCreator("You win!", "", currentCorrectAnswer.image);
             $(".wins").text("" + correctlyAnswered);
         } else {
             incorrectlyAnswered++;
-            msgCreator("You lose...", currentCorrectAnswer.answer, currentCorrectAnswer.image);
+            msgCreator("You lose...", "The correct answer is: " + currentCorrectAnswer.answer, currentCorrectAnswer.image);
             $(".losses").text(incorrectlyAnswered);
         }
+
 
         // End game state
 
         currentQuestionIndex++;
         if (currentQuestionIndex === trivia.length) {
             pauseTimer = true;
-            $("#gameDiv").hide();
-            $("#gameStatDiv").hide();
-            $("#endingStatDiv").show();
+            setTimeout(function () {
+                $("#endingStatDiv").show();
+                $("#gameDiv").hide();
+            }, 3000);
+        } else {
+            setTimeout(function () {
+                displayQuestionAnswers(trivia[currentQuestionIndex]);
+            }, 3000);
         }
-        displayQuestionAnswers(trivia[currentQuestionIndex]);
     };
 
     // Checking to see if an answer was clicked before time ran out.
@@ -202,8 +209,8 @@ $(document).ready(function () {
         if (timeLeftPlay === 0) {
             pauseTimer = true;
             unanswered++;
-            msgCreator("Time ran out!", currentCorrectAnswer.answer, currentCorrectAnswer.image);
-            setTimeout(unansweredPause, 2000);
+            msgCreator("Time ran out!", "The correct answer is: " + currentCorrectAnswer.answer, currentCorrectAnswer.image);
+            setTimeout(unansweredPause, 3000);
             $(".outOfTime").text(unanswered);
             $("#gameDiv").show();
             $("#gameStatDiv").show();
@@ -225,7 +232,10 @@ $(document).ready(function () {
                 pauseTimer = true;
                 $("#gameDiv").hide();
                 $("#gameStatDiv").hide();
-                $("#endingStatDiv").show();
+                setTimeout(function () {
+                    $("#endingStatDiv").show();
+                }, 3000);
+
             }
         }
     }
